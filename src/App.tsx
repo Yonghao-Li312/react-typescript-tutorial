@@ -10,8 +10,8 @@ const App: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [completedTodos, setCompletedTodos] = useState<Todo[]>([]);
 
-  const handleAdd = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleAdd = (event: React.FormEvent) => {
+    event.preventDefault();
 
     if (todo.trim()) {
       setTodos([...todos, { id: Date.now(), todo: todo.trim(), isDone: false }]);
@@ -48,76 +48,20 @@ const App: React.FC = () => {
     setCompletedTodos(completed);
   };
 
-  return <div className="App">
-    <span className="heading">Taskify</span>
-    <DragDropContext onDragEnd={onDragEnd}>
-      <InputField todo={todo} setTodo={setTodo} handleAdd={handleAdd}/>
-      <TodoList
-        todos={todos}
-        setTodos={setTodos}
-        completedTodos={completedTodos}
-        setCompletedTodos={setCompletedTodos}
-      />
-    </DragDropContext>
-  </div>;
+  return (
+    <div className="App">
+      <span className="heading">Taskify</span>
+      <DragDropContext onDragEnd={onDragEnd}>
+        <InputField todo={todo} setTodo={setTodo} handleAdd={handleAdd} />
+        <TodoList
+          todos={todos}
+          setTodos={setTodos}
+          completedTodos={completedTodos}
+          setCompletedTodos={setCompletedTodos}
+        />
+      </DragDropContext>
+    </div>
+  );
 };
 
 export default App;
-
-
-/* let name: string;
-let age: number | string; // it's called Union, means age can be either string or number
-let isStudent: boolean;
-let hobbies: string[];
-let role: [number, string]; //tuple
-
-let printName: (name: String) => never; //function
-
-
-
-// type Person = {
-//   name: string;
-//   age?: number;  //表明age元素可以省略
-// };
-
-// let person: Person = {
-//   name: "23432",
-// };
-
-// let lotsOfPeople: Person[];
-
-let personName: unknown; //when you don't know the type
-
-interface Person {
-  name: string;
-  age?: number;
-};
-
-interface Guy extends Person {
-  profession: string;
-};
-
-type X = {
-  a: string;
-  b: number;
-};
-
-type Y = {
-  c: string;
-  d: number;
-};
-
-let y: Y = {
-  c: "efdas",
-  d: 42,
-};
-
-function App() {
-  return (
-    <div className="App">
-        Hello World
-    </div>
-  );
-}
-
-export default App; */
